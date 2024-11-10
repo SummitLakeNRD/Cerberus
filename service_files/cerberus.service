@@ -1,0 +1,18 @@
+##Place file in the following destination: /etc/systemd/system/ ###
+
+[Unit]
+Description=Service file for Cerberus watchdog python program for SLPT NRD SWEON clients
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /home/<USER>/code/Cerberus/cerberus.py
+WorkingDirectory=/home/<USER>/code/Cerberus/
+StandardOutput=file:/home/<USER>/code/Cerberus/errorLogs/main_output.log
+StandardError=file:/home/<USER>/code/Cerberus/errorLogs/error_file.log
+Restart=always
+RestartSec=900
+User=<USER>
+
+[Install]
+WantedBy=multi-user.target
