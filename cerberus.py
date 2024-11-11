@@ -24,7 +24,7 @@ def main():
 #   if:
 #       client has been disconnected for 4 hours (?)
 #       create cached list (tuple or text file?) with 16 rows for 4 hours (only disconnected clients)
-#       then --> 1) send message to SWEON slack channel
+#       then --> 1) send message to SWEON slack channel https://www.datacamp.com/tutorial/how-to-send-slack-messages-with-python
 #                2) email keane, james, & others (?)
 #                - equipment type, location, other info
 #   else:
