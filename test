@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 cerberus.py src/test.xlsx 10 

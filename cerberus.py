@@ -1,17 +1,35 @@
 from argparse import ArgumentParser
+from src.network_status import readClients
 
 
 parser = ArgumentParser()
-parser.add_argument()
-parser.add_argument()
-parser.add_argument()
-parser.add_argument()
-parser.add_argument()
-parser.add_argument()
+parser.add_argument('client_file', type = str, 
+                    help = 'provide path to xlsx file with network info')
+parser.add_argument('ping_count', type=int, default = 10, 
+                    help = 'number of round-trip data packets to send')
+#parser.add_argument()
+#parser.add_argument()
+#parser.add_argument()
+#parser.add_argument()
 args = parser.parse_args()
 
 
+rc = readClients(args.client_file, args.ping_count)
+
+
 def main():
+    test = rc.clientInformation()
+    print(test)
+
+    # var1, var2, etc = retrieveConnectionMetrics()
+
+    # watchdogNotification()
+
+    # databaseAppend()
+
+    #writeJson()
+    # This will be a temporary function used to write connection metrics to json files until the postgreSQL database is ready
+
 # Program will automatically run once every fifteen minutes per service file
 # directions. It will need to:
 # 1) read in csv containing list of network clients w/ IP addresses & other info
