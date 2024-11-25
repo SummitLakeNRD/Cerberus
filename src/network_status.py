@@ -1,6 +1,7 @@
+from re import findall
 import pandas as pd
 import platform
-from subprocess import call
+from subprocess import Popen, PIPE
 
 
 class readClients:
@@ -12,12 +13,14 @@ class readClients:
         
     def pingClient(self, host):
         # Currently outputing ping info every time, need to fix
-        param = '-n' if platform.system().lower()=='windows' else '-c'
-        command = ['ping', param, self.ping_count, host]
-        return call(command)
+        ping = Popen(["/bin/ping", "-c 10", "-w 500", host], 
+                      stdout=PIPE).stdout.read().decode("utf-8")
+        try:
+            net_info = findall(r'\d*[.,]?\d*', ping)
+        except AttributeError:
+            net_info = '0.000/0.000/0.000/0.000 ms'
+        return ping
 
     def clientInformation(self):
-        test = []
-        ping = self.pingClient(self.client_info['ip_address'][0])
-        test.append(ping)
+        test = self.pingClient(self.client_info['ip_address'][0])
         return test
