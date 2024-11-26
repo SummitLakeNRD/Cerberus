@@ -18,8 +18,11 @@ rc = readClients(args.client_file, args.ping_count)
 
 
 def main():
-    test = rc.clientInformation()
-    print(test)
+    packet_loss, min_ping, mean_ping, max_ping = rc.clientInformation()
+    print(packet_loss)
+    print(min_ping)
+    print(mean_ping)
+    print(max_ping)
 
     # var1, var2, etc = retrieveConnectionMetrics()
 
