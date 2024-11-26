@@ -1,36 +1,35 @@
 from argparse import ArgumentParser
 from src.network_status import readClients
+from src.output import fileOut
 
 
 parser = ArgumentParser()
-parser.add_argument('client_file', type = str, 
+parser.add_argument('client_file', type=str, 
                     help = 'provide path to xlsx file with network info')
-parser.add_argument('ping_count', type=int, default = 10, 
+parser.add_argument('ping_count', type=int, default=10, 
                     help = 'number of round-trip data packets to send')
-#parser.add_argument()
-#parser.add_argument()
+parser.add_argument('timeout', type=int, default=500,
+                    help = 'time in ms for ping timeout')
+parser.add_argument('--output_directory', type=str, default='./output/',
+                    help = 'directory to output json files to')
 #parser.add_argument()
 #parser.add_argument()
 args = parser.parse_args()
 
 
-rc = readClients(args.client_file, args.ping_count)
+rc = readClients(args.client_file, args.ping_count, args.timeout)
+f = fileOut(args.output_directory)
 
 
 def main():
-    packet_loss, min_ping, mean_ping, max_ping = rc.clientInformation()
-    print(packet_loss)
-    print(min_ping)
-    print(mean_ping)
-    print(max_ping)
-
-    # var1, var2, etc = retrieveConnectionMetrics()
+    network_status_dict = rc.clientInformation()
+    #print(network_dict)
 
     # watchdogNotification()
 
     # databaseAppend()
 
-    #writeJson()
+    f.output(network_status_dict)
     # This will be a temporary function used to write connection metrics to json files until the postgreSQL database is ready
 
 # Program will automatically run once every fifteen minutes per service file
