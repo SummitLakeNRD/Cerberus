@@ -13,6 +13,7 @@ class readClients:
         self.client_info = self.df[["ip_address", "client", "type", 
                                     "latitude", "longitude"]]
         self.ping_count = str(ping_count)
+        self.timeout = str(timeout)
         self.packet_loss = []
         self.min_ping = []
         self.mean_ping = []
@@ -21,7 +22,7 @@ class readClients:
         
     def pingClient(self, host):
         # Pings network clients and collects relevant metrics
-        ping = Popen(["/bin/ping", "-c", self.ping_count, "-w 500", host], 
+        ping = Popen(["/bin/ping", "-c", self.ping_count, "-w", self.timeout, host], 
                       stdout=PIPE).stdout.read().decode("utf-8")
         # Only collect the last two lines of ping info
         ping = str(ping.splitlines()[-2:]) 
