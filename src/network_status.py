@@ -1,5 +1,6 @@
 import platform
 import pandas as pd
+from datetime import datetime
 from re import search, findall
 from subprocess import Popen, PIPE
 
@@ -41,6 +42,7 @@ class readClients:
             packet_loss, ping_times = self.pingClient(row['ip_address'])
             packet_loss = search("\d+", packet_loss).group()
             self.network_dict[row['ip_address']] = {}
+            self.network_dict[row['ip_address']]['datetime'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             self.network_dict[row['ip_address']]['client'] = row['client']
             self.network_dict[row['ip_address']]['latitude'] = float(row['latitude'])
             self.network_dict[row['ip_address']]['longitude'] = float(row['longitude'])

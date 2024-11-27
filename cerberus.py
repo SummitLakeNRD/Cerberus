@@ -29,9 +29,11 @@ def main():
 
     # databaseAppend()
 
+    # This will be a temporary function used to write connection metrics 
+    # to json files until the postgreSQL database is ready to use
     f.output(network_status_dict)
-    # This will be a temporary function used to write connection metrics to json files until the postgreSQL database is ready
 
+############# PROGRAM OVERVIEW ##################
 # Program will automatically run once every fifteen minutes per service file
 # directions. It will need to:
 # 1) read in csv containing list of network clients w/ IP addresses & other info
@@ -57,12 +59,8 @@ def main():
 #   - avg ping
 #   - min ping
 #   - max ping
-#
-#
-#
-#
-#
-#
+#################################################
+
 
 if __name__ == '__main__':
     main()

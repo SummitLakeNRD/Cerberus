@@ -11,5 +11,6 @@ class fileOut:
 
     def output(self, network_status_dictionary):
         filename = 'network_status' + '_' + self.datetime + '.json'
-        with open("{}".format(filename), 'w') as f:
+        filepath = os.path.join(self.output_directory, filename)
+        with open("{}".format(filepath), 'w') as f:
             json.dump(network_status_dictionary, f)
