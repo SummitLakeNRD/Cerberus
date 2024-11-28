@@ -8,8 +8,8 @@ parser.add_argument('client_file', type=str,
                     help = 'provide path to xlsx file with network info')
 parser.add_argument('ping_count', type=int, default=10, 
                     help = 'number of round-trip data packets to send')
-parser.add_argument('timeout', type=int, default=500,
-                    help = 'time in ms for ping timeout')
+parser.add_argument('timeout', type=int, default=1,
+                    help = 'time in seconds for ping timeout')
 parser.add_argument('--output_directory', type=str, default='./output/',
                     help = 'directory to output json files to')
 #parser.add_argument()

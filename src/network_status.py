@@ -25,7 +25,7 @@ class readClients:
         ping = Popen(["/bin/ping", "-c", self.ping_count, "-w", self.timeout, host], 
                       stdout=PIPE).stdout.read().decode("utf-8")
         # Only collect the last two lines of ping info
-        ping = str(ping.splitlines()[-2:]) 
+        ping = str(ping.splitlines()[-2:])
         try:
             packet_loss = search("(\d+(\.\d+)?)%", ping).group()
         except AttributeError:
