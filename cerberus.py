@@ -9,7 +9,7 @@ parser.add_argument('client_file', type=str,
 parser.add_argument('ping_count', type=int, default=10, 
                     help = 'number of round-trip data packets to send')
 parser.add_argument('timeout', type=int, default=1,
-                    help = 'time in seconds for ping timeout')
+                    help = 's (linux) or ms (windows) for ping timeout')
 parser.add_argument('--output_directory', type=str, default='./output/',
                     help = 'directory to output json files to')
 #parser.add_argument()
