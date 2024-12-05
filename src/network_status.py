@@ -18,7 +18,7 @@ class readClients:
         self.min_ping = []
         self.mean_ping = []
         self.max_ping = []
-        self.network_dict = {}
+        self.network_dict = []
         
     def pingClient(self, host):
         # Pings network clients and collects relevant metrics
@@ -39,26 +39,31 @@ class readClients:
 
     def clientInformation(self):
         # Concatenates network client information into dictionary object type
-        for i, row in self.client_info.iterrows():
+        for _, row in self.client_info.iterrows():
             packet_loss, ping_times = self.pingClient(row['ip_address'])
             packet_loss = search("\d+", packet_loss).group()
-            self.network_dict[row['ip_address']] = {}
-            self.network_dict[row['ip_address']]['datetime'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            self.network_dict[row['ip_address']]['client'] = row['client']
-            self.network_dict[row['ip_address']]['latitude'] = float(row['latitude'])
-            self.network_dict[row['ip_address']]['longitude'] = float(row['longitude'])
-            self.network_dict[row['ip_address']]['packet_loss'] = float(packet_loss)
             try:
-                self.network_dict[row['ip_address']]['min_ping'] = float(ping_times[0])
+                min_ping =  float(ping_times[0])
             except IndexError:
-                self.network_dict[row['ip_address']]['min_ping'] = float(-9999)
+                min_ping = float(-9999)
             try:
-                self.network_dict[row['ip_address']]['mean_ping'] = float(ping_times[1])
+                mean_ping = float(ping_times[1])
             except IndexError:
-                self.network_dict[row['ip_address']]['mean_ping'] = float(-9999)
+                mean_ping = float(-9999)
             try:
-                self.network_dict[row['ip_address']]['max_ping'] = float(ping_times[2])
+                max_ping = float(ping_times[2])
             except IndexError:
-                self.network_dict[row['ip_address']]['max_ping'] = float(-9999)
-
+                max_ping = float(-9999)
+            network_dict_temp = {
+                'datetime': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'ip_address': row['ip_address'],
+                'client': row['client'],
+                'latitude': float(row['latitude']),
+                'longitude': float(row['longitude']),
+                'packet_loss': float(packet_loss),
+                'min_ping': min_ping,
+                'mean_ping': mean_ping,
+                'max_ping': max_ping
+            }
+            self.network_dict.append(network_dict_temp)  
         return self.network_dict
