@@ -22,7 +22,7 @@ class readClients:
         
     def pingClient(self, host):
         # Pings network clients and collects relevant metrics
-        ping = Popen(["/bin/ping", "-c", self.ping_count, "-w", self.timeout, host], 
+        ping = Popen(["/bin/ping", "-c", self.ping_count, "-W", self.timeout, host], 
                       stdout=PIPE).stdout.read().decode("utf-8")
         # Only collect the last two lines of ping info
         ping = str(ping.splitlines()[-2:])
