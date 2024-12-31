@@ -1,4 +1,3 @@
-import platform
 import pandas as pd
 from datetime import datetime
 from re import search, findall
