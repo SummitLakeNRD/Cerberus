@@ -3,23 +3,23 @@ from src.network_status import readClients
 from src.output import fileOut
 
 
-parser = ArgumentParser()
-parser.add_argument('client_file', type=str, 
-                    help = 'provide path to xlsx file with network info')
-parser.add_argument('ping_count', type=int, default=10, 
-                    help = 'number of round-trip data packets to send')
-parser.add_argument('timeout', type=int, default=1,
-                    help = 's (linux) or ms (windows) for ping timeout')
-parser.add_argument('--output_directory', type=str, default='./output/',
-                    help = 'directory to output json files to')
-args = parser.parse_args()
-
-
-rc = readClients(args.client_file, args.ping_count, args.timeout)
-f = fileOut(args.output_directory)
-
-
 def main():
+    # 
+    parser = ArgumentParser()
+    parser.add_argument('client_file', type=str, 
+                        help = 'provide path to xlsx file with network info')
+    parser.add_argument('ping_count', type=int, default=10, 
+                        help = 'number of round-trip data packets to send')
+    parser.add_argument('timeout', type=int, default=1,
+                        help = 's (linux) or ms (windows) for ping timeout')
+    parser.add_argument('--output_directory', type=str, default='./output/',
+                        help = 'directory to output json files to')
+    args = parser.parse_args()
+
+    # Supplies excel file with client information to the script
+    rc = readClients(args.client_file, args.ping_count, args.timeout)
+    f = fileOut(args.output_directory)
+
     # The following function gathers client information from network pings
     network_status_dict = rc.clientInformation()
 
